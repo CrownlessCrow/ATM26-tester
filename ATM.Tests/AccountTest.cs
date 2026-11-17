@@ -1,12 +1,29 @@
-﻿namespace ATM.ATM.Tests;
+﻿namespace ATM.Tests;
 
 using Xunit;
 
 public class AccountTest
-{
-    [Fact]
-    public void Test1()
-    {
 
+{
+    private Account account = new Account(5000);
+
+    [Fact]
+    public void Constructor_SetsInitialBalance()
+
+    {
+        Assert.Equal(5000, account.GetBalance());
     }
+
+    [Fact]
+    public void Deposit_IncreasesBalance()
+
+    {
+        bool result = account.Deposit(1000);
+
+        Assert.True(result);
+        Assert.Equal(6000, account.GetBalance());
+    }
+
+
+
 }
