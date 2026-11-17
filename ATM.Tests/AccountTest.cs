@@ -24,6 +24,16 @@ public class AccountTest
         Assert.Equal(6000, account.GetBalance());
     }
 
+[Fact]
+
+public void Deposit_NegativeAmount_IsRejected()
+
+    {
+        bool result = account.Deposit(-500);
+
+        Assert.False(result);
+        Assert.Equal(5000, account.GetBalance());
+    }
 
 
 }
