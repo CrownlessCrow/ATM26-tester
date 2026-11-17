@@ -19,11 +19,15 @@ public class Account
         Balance -= amount;
         return true;
     }
-    
+
     public bool Deposit(int amount)
     {
+        if (amount <= 0)
+        {
+            return false;
+        }
+
         Balance += amount;
         return true;
     }
-    
 }
