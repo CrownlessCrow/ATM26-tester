@@ -45,4 +45,14 @@ public class AccountTest
         Assert.True(result);
         Assert.Equal(4000, account.GetBalance());
     }
+    [Fact]
+    public void Withdraw_MoreThanBalance_IsRejected()
+
+    {
+        bool result = account.Withdraw(6000);
+
+        Assert.False(result);
+        Assert.Equal(5000, account.GetBalance());
+    }
+
 }
