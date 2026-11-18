@@ -66,5 +66,14 @@ public class AccountTest
         Assert.Equal(5000, account.GetBalance());
 
     }
+    [Fact]
+    public void Withdraw_ExactBalance_IsAllowed()
+
+    {
+        bool result = account.Withdraw(5000);
+
+        Assert.True(result);
+        Assert.Equal(0, account.GetBalance());
+    }
 
 }
