@@ -1,5 +1,6 @@
 ﻿namespace ATM.Tests;
 
+using System.IO.Pipelines;
 using Xunit;
 
 public class AccountTest
@@ -45,6 +46,7 @@ public class AccountTest
         Assert.True(result);
         Assert.Equal(4000, account.GetBalance());
     }
+
     [Fact]
     public void Withdraw_MoreThanBalance_IsRejected()
 
@@ -53,6 +55,16 @@ public class AccountTest
 
         Assert.False(result);
         Assert.Equal(5000, account.GetBalance());
+    }
+
+    [Fact]
+    public void Withdraw_NegativeAmmount_IsRejected()
+    {
+        bool result = account.Withdraw(-500);
+
+        Assert.False(result);
+        Assert.Equal(5000, account.GetBalance());
+
     }
 
 }
