@@ -36,6 +36,24 @@ public void EnterPin_WrongPin_IsRejected()
         Assert.False(resultat);
         Assert.False(atm.IsAuthenticated);
     }
+[Fact]
+public void EnterPin_CorrectPin_IsAuthenticated()
+    {
+        atm.InsertCard(card);
+        bool resultat = atm.EnterPin("1234");
+
+        Assert.True(resultat);
+        Assert.True(atm.IsAuthenticated);
+    }
+
+[Fact]
+public void EjectCard_AtmHasNoCard()
+    {
+        atm.InsertCard(card);
+        atm.EjectCard();
+
+        Assert.False(atm.HasCardInserted);
+    }
 
 
 }
