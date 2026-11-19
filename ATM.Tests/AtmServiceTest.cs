@@ -54,6 +54,15 @@ public void EjectCard_AtmHasNoCard()
 
         Assert.False(atm.HasCardInserted);
     }
+[Fact]
+public void GetBalance_WhenLoggedIn_ReturnsAccountBalance()
+    {
+        atm.InsertCard(card);
+        atm.EnterPin("1234");
 
+        int saldo = atm.GetBalance();
+
+        Assert.Equal(5000, saldo);
+    }
 
 }
