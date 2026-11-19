@@ -25,4 +25,17 @@ public class AtmServiceTest
         Assert.True(atm.HasCardInserted);
 
     }
+[Fact]
+
+public void EnterPin_WrongPin_IsRejected()
+
+    {
+        atm.InsertCard(card);
+        bool resultat = atm.EnterPin("1111");
+
+        Assert.False(resultat);
+        Assert.False(atm.IsAuthenticated);
+    }
+
+
 }
