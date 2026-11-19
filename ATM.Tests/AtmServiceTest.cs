@@ -77,5 +77,17 @@ public class AtmServiceTest
         Assert.True(resultat);
         Assert.Equal(6000, atm.GetBalance());
     }
+    [Fact]
+    public void Withdraw_5000_TakenFromAccount()
+    {
+        atm.InsertCard(card);
+        atm.EnterPin("1234");
+
+        bool resultat = atm.Withdraw(5000);
+
+        Assert.True(resultat);
+        Assert.Equal(0, atm.GetBalance());
+    }
+
 
 }
