@@ -25,9 +25,9 @@ public class AtmServiceTest
         Assert.True(atm.HasCardInserted);
 
     }
-[Fact]
+    [Fact]
 
-public void EnterPin_WrongPin_IsRejected()
+    public void EnterPin_WrongPin_IsRejected()
 
     {
         atm.InsertCard(card);
@@ -36,8 +36,8 @@ public void EnterPin_WrongPin_IsRejected()
         Assert.False(resultat);
         Assert.False(atm.IsAuthenticated);
     }
-[Fact]
-public void EnterPin_CorrectPin_IsAuthenticated()
+    [Fact]
+    public void EnterPin_CorrectPin_IsAuthenticated()
     {
         atm.InsertCard(card);
         bool resultat = atm.EnterPin("1234");
@@ -46,16 +46,16 @@ public void EnterPin_CorrectPin_IsAuthenticated()
         Assert.True(atm.IsAuthenticated);
     }
 
-[Fact]
-public void EjectCard_AtmHasNoCard()
+    [Fact]
+    public void EjectCard_AtmHasNoCard()
     {
         atm.InsertCard(card);
         atm.EjectCard();
 
         Assert.False(atm.HasCardInserted);
     }
-[Fact]
-public void GetBalance_WhenLoggedIn_ReturnsAccountBalance()
+    [Fact]
+    public void GetBalance_WhenLoggedIn_ReturnsAccountBalance()
     {
         atm.InsertCard(card);
         atm.EnterPin("1234");
@@ -64,6 +64,18 @@ public void GetBalance_WhenLoggedIn_ReturnsAccountBalance()
 
         Assert.Equal(5000, saldo);
     }
+    [Fact]
+    public void Deposit_WhenLoggedIn_IncreasesAccountBalance()
 
+    {
+        atm.InsertCard(card);
+        atm.EnterPin("1234");
+
+        bool resultat = atm.Deposit(1000);
+
+
+        Assert.True(resultat);
+        Assert.Equal(6000, atm.GetBalance());
+    }
 
 }
