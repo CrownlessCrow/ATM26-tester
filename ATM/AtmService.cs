@@ -7,7 +7,7 @@ public class AtmService
 
     public bool HasCardInserted => _currentCard != null;
     public bool IsAuthenticated => _isAuthenticated;
-    
+
     public int AtmBalance { get; private set; }
 
     public AtmService(int initialBalance)
@@ -47,16 +47,28 @@ public class AtmService
     public bool Withdraw(int amount)
     {
         EnsureAuthenticated();
+        if (amount > AtmBalance)
+        {
+            return false;
+        }
+
+        bool kontotSaja = _currentCard!.Account.Withdraw(amount);
+        if (!kontotSaja)
+
+        {
+            return false;
+        }
+
         AtmBalance -= amount;
-        return _currentCard!.Account.Withdraw(amount);
+        return true;
     }
-    
+
     public bool Deposit(int amount)
     {
         EnsureAuthenticated();
         return _currentCard!.Account.Deposit(amount);
     }
-    
+
     public void EnsureAuthenticated() //Inget kort  eller inte Inloggad
     {
         if (_currentCard == null || !_isAuthenticated)
