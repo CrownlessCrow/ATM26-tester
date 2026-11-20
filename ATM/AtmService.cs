@@ -57,7 +57,7 @@ public class AtmService
         return _currentCard!.Account.Deposit(amount);
     }
     
-    public void EnsureAuthenticated()
+    public void EnsureAuthenticated() //Inget kort  eller inte Inloggad
     {
         if (_currentCard == null || !_isAuthenticated)
         {

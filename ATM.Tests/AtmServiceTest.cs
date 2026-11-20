@@ -89,5 +89,19 @@ public class AtmServiceTest
         Assert.Equal(0, atm.GetBalance());
     }
 
+    [Fact]
+    public void Withdraw_6000_InsufficientFunds_NothingIsTaken()
+
+    {
+        atm.InsertCard(card);
+        atm.EnterPin("1234");
+
+        bool resultat = atm.Withdraw(6000);
+
+        Assert.False(resultat);
+        Assert.Equal(5000, atm.GetBalance());
+        Assert.Equal(7000, atm.AtmBalance);
+    }
+
 
 }
