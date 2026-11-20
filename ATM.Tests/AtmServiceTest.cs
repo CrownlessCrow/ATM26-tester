@@ -83,9 +83,12 @@ public class AtmServiceTest
         atm.InsertCard(card);
         atm.EnterPin("1234");
 
-        bool resultat = atm.Withdraw(5000);
+        WithdrawResult resultat = atm.Withdraw(5000);
+        Assert.Equal(WithdrawResult.Success, resultat);
 
-        Assert.True(resultat);
+        //bool resultat = atm.Withdraw(5000);
+        //Assert.True(resultat);
+
         Assert.Equal(0, atm.GetBalance());
     }
 
@@ -96,26 +99,33 @@ public class AtmServiceTest
         atm.InsertCard(card);
         atm.EnterPin("1234");
 
-        bool resultat = atm.Withdraw(6000);
 
-        Assert.False(resultat);
+        WithdrawResult resultat = atm.Withdraw(6000);
+        Assert.Equal(WithdrawResult.InsufficientFunds, resultat);
+
+
+        //bool resultat = atm.Withdraw(6000);
+        //Assert.False(resultat);
+
         Assert.Equal(5000, atm.GetBalance());
         Assert.Equal(7000, atm.AtmBalance);
     }
 
-[Fact]
+    [Fact]
 
-public void Withdraw_8000_AtmHasNotEnoughCash_NothingIsTaken()
+    public void Withdraw_8000_AtmHasNotEnoughCash_NothingIsTaken()
 
     {
         atm.InsertCard(card);
         atm.EnterPin("1234");
         atm.Deposit(3000);
 
+        WithdrawResult resultat = atm.Withdraw(8000);
+        //bool resultat = atm.Withdraw(8000);
 
-        bool resultat = atm.Withdraw(8000);
+        Assert.Equal(WithdrawResult.InsufficientAtmCash, resultat);
 
-        Assert.False(resultat);
+        //Assert.False(resultat);
         Assert.Equal(8000, atm.GetBalance());
         Assert.Equal(7000, atm.AtmBalance);
     }

@@ -44,23 +44,29 @@ public class AtmService
         return _currentCard!.Account.GetBalance();
     }
 
-    public bool Withdraw(int amount)
+
+    public WithdrawResult Withdraw(int amount)
+    //public bool Withdraw(int amount)
     {
         EnsureAuthenticated();
+        
         if (amount > AtmBalance)
         {
-            return false;
+            return WithdrawResult.InsufficientAtmCash;
+            //return false;
         }
 
         bool kontotSaja = _currentCard!.Account.Withdraw(amount);
         if (!kontotSaja)
 
         {
-            return false;
+            return WithdrawResult.InsufficientFunds;
+            //return false;
         }
 
         AtmBalance -= amount;
-        return true;
+        return WithdrawResult.Success;
+        //return true;
     }
 
     public bool Deposit(int amount)

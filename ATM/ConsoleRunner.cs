@@ -119,8 +119,25 @@ public static class ConsoleRunner
         string? input = Console.ReadLine();
 
         int amount = int.Parse(input);
+
+        WithdrawResult resultat = atm.Withdraw(amount);
+
+        if (resultat == WithdrawResult.Success)
+        {
+            Console.WriteLine("Varsågod, ta dina pengar.");
+        }
+        else if (resultat == WithdrawResult.InsufficientFunds)
+        {
+            Console.WriteLine("Kontot har inte täckning.");
+        }
+        else if (resultat == WithdrawResult.InsufficientAtmCash)
+        {
+            Console.WriteLine("Bankomaten saknar kontanter.");
+        }
+
+
         
-        bool success = atm.Withdraw(amount);
+        /*bool success = atm.Withdraw(amount);
 
         if (success)
         {
@@ -129,7 +146,7 @@ public static class ConsoleRunner
         else
         {
             Console.WriteLine("Uttaget kunde inte genomföras.");
-        }
+        }*/
     }
     
     private static void DepositFlow(AtmService atm)
