@@ -23,9 +23,9 @@ public static class ConsoleRunner
                 ShowMainMenu(atm);
             }
         }
-        
+
         Console.WriteLine("Tack och hej!");
-        
+
     }
 
     private static bool ShowWelcomeMenu(AtmService atm, Card demoCard)
@@ -118,7 +118,13 @@ public static class ConsoleRunner
         Console.Write("Ange belopp att ta ut: ");
         string? input = Console.ReadLine();
 
-        int amount = int.Parse(input);
+        //int amount = int.Parse(input);
+        if (!int.TryParse(input, out int amount))
+        {
+            Console.WriteLine("Ogiltigt belopp.  Ange en siffra");
+            return;
+        }
+
 
         WithdrawResult resultat = atm.Withdraw(amount);
 
@@ -136,7 +142,7 @@ public static class ConsoleRunner
         }
 
 
-        
+
         /*bool success = atm.Withdraw(amount);
 
         if (success)
@@ -148,13 +154,19 @@ public static class ConsoleRunner
             Console.WriteLine("Uttaget kunde inte genomföras.");
         }*/
     }
-    
+
     private static void DepositFlow(AtmService atm)
     {
         Console.Write("Ange belopp att sätta in: ");
         string? input = Console.ReadLine();
 
-        int amount = int.Parse(input);
+        //int amount = int.Parse(input);
+        if(!int.TryParse(input, out int amount))
+        {
+            Console.WriteLine("Ogiltigt belopp. Ange end siffra");
+            return;
+        }
+
 
         bool success = atm.Deposit(amount);
 
@@ -166,7 +178,7 @@ public static class ConsoleRunner
         {
             Console.WriteLine("Insättningen kunde inte genomföras.");
         }
-        
+
     }
-    
+
 }
