@@ -154,5 +154,16 @@ public class AtmServiceTest
 
         Assert.Throws<InvalidOperationException>(() => atm.Withdraw(1000));
     }
+[Fact]
+public void EnterPin_ThreeWrongPins_CardIsTaken()
+    {
+        atm.InsertCard(card);
 
+        atm.EnterPin("1111");
+        atm.EnterPin("2222");
+        atm.EnterPin("3333");
+
+        Assert.False(atm.HasCardInserted);
+    }
+    
 }
