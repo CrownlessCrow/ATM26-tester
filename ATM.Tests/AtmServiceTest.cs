@@ -131,4 +131,13 @@ public class AtmServiceTest
     }
 
 
+[Fact]
+public void GetBalance_WithoutPin_Throws()
+
+    {
+        atm.InsertCard(card);
+
+        Assert.Throws<InvalidOperationException>(() => atm.GetBalance());
+    }
+
 }
