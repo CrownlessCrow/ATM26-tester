@@ -68,9 +68,20 @@ public static class ConsoleRunner
         }
         else
         {
-            Console.WriteLine("Fel PIN.");
-            Console.WriteLine("Kortet matas ut.");
-            atm.EjectCard();
+            //Console.WriteLine("Fel PIN.");
+            //Console.WriteLine("Kortet matas ut.");
+            //atm.EjectCard();
+
+            if(atm.HasCardInserted)
+            {
+                Console.WriteLine("Fel PIN, försök igen");
+            }
+            else
+            {
+                Console.WriteLine("Fel PIN tre gånger. Kortet har behållits");
+            }
+
+
         }
     }
 
