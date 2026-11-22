@@ -165,5 +165,16 @@ public void EnterPin_ThreeWrongPins_CardIsTaken()
 
         Assert.False(atm.HasCardInserted);
     }
+        [Fact]
+    public void EjectCard_AfterLogin_LogsOut()
+    {
+        atm.InsertCard(card);
+        atm.EnterPin("1234");
+
+        atm.EjectCard();
+
+        Assert.False(atm.IsAuthenticated);
+        Assert.Throws<InvalidOperationException>(() => atm.GetBalance());
+    }
     
 }
